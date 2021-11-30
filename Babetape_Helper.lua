@@ -1,4 +1,4 @@
-script_version(0.1)
+script_version(1.1)
 script_author = "Tape"
 
 local imgui = require 'imgui'
@@ -12,7 +12,7 @@ u8 = encoding.UTF8
 
 local sw,sh = getScreenResolution()
 
-local LAST_VERSION = '0.1'
+local LAST_VERSION = '1.1'
 local json_url = 'https://raw.githubusercontent.com/GovnocodedByChapo/InGameSampLauncher/main/update.json' -- тут ссылка на raw
 
 local fa_font = nil
@@ -100,7 +100,7 @@ function imgui.OnDrawFrame()
 			imgui.TextQuestion(u8"Очищает память стрима, и вы начинаете играть как будто вы только запустили гта.")
 			imgui.SetNextWindowPos(imgui.ImVec2((sw/2),sh/2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5,0.5))
 	        	imgui.BeginChild("##other_bar", imgui.ImVec2(380, 170), true)
-			 imgui.Text(u8"Разное")			 
+			 imgui.Text(u8"Разное1")			 
 				imgui.Checkbox(u8"Переводить секунды в минуты в деморгане",dmg)
 				mainIni.config.dmg = dmg.v
 				save()
