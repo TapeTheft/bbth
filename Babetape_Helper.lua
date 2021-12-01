@@ -1,4 +1,4 @@
-script_version(1.1)
+script_version(1.0)
 script_author = "Tape"
 
 local imgui = require 'imgui'
@@ -10,7 +10,7 @@ local fa = require 'fAwesome5'
 encoding.default = 'CP1251'
 u8 = encoding.UTF8
 
-local LAST_VERSION = '1.1'
+local LAST_VERSION = '1.0'
 
 local sw,sh = getScreenResolution()
 
@@ -83,8 +83,8 @@ function main()
     if not isSampLoaded() or not isSampfuncsLoaded() then return end
 	while not isSampAvailable() do wait(100) end
 		imgui.Process = false
-	sampAddChatMessage("{42AAFF}[Babetape Helper] {ffffff}Загружен!", 0x42AAFF)	
-	sampAddChatMessage("{42AAFF}[Babetape Helper] {ffffff}Активация: {42AAFF}/bbth. {FFFFFF}Автор: {42AAFF}Tape", 0x42AAFF)	
+	sampAddChatMessage("{42AAFF}[Babetape Helper] {ffffff}Загружен!", -1)	
+	sampAddChatMessage("{42AAFF}[Babetape Helper] {ffffff}Активация: {42AAFF}/bbth. {FFFFFF}Автор: {42AAFF}Tape", -1)	
 	sampRegisterChatCommand("acl",clean)
 	sampRegisterChatCommand("bbth", function()		
       main_window_state.v = not main_window_state.v
@@ -323,7 +323,7 @@ function clean()
     local pX, pY, pZ = getCharCoordinates(PLAYER_PED)
     requestCollision(pX, pY)
     loadScene(pX, pY, pZ)
-    sampAddChatMessage("{42AAFF}[Babetape Helper] {FFFFFF}Очистка произошла успешно!", 0x42AAFF)
+    sampAddChatMessage("{42AAFF}[Babetape Helper] {FFFFFF}Очистка произошла успешно!", -1)
 end
 
 function hook.onDisplayGameText(style, time, text)
@@ -487,7 +487,7 @@ function autoupdate(json_url, prefix, url)
 				lua_thread.create(function(prefix)
 				  local dlstatus = require('moonloader').download_status
 				  local color = -1
-				  sampAddChatMessage(('{42AAFF}[Babetape Helper] {FFFFFF}Обнаружено обновление. Пытаюсь обновиться c {42AAFF}'..thisScript().version..' {FFFFFF}на {42AAFF}'..updateversion), color, 0x42AAFF)	
+				  sampAddChatMessage(('{42AAFF}[Babetape Helper] {FFFFFF}Обнаружено обновление. Пытаюсь обновиться c {42AAFF}'..thisScript().version..' {FFFFFF}на {42AAFF}'..updateversion), color)	
 				  wait(250)
 				  downloadUrlToFile(updatelink, thisScript().path,
 					function(id3, status1, p13, p23)
@@ -495,13 +495,13 @@ function autoupdate(json_url, prefix, url)
 						print(string.format('Загружено %d из %d.', p13, p23))
 					  elseif status1 == dlstatus.STATUS_ENDDOWNLOADDATA then
 						print('Загрузка обновления завершена.')
-						sampAddChatMessage(('{42AAFF}[Babetape Helper] {FFFFFF}Обновление завершено!'), color, 0x42AAFF)
+						sampAddChatMessage(('{42AAFF}[Babetape Helper] {FFFFFF}Обновление завершено!'), color)
 						goupdatestatus = true
 						lua_thread.create(function() wait(500) thisScript():reload() end)
 					  end
 					  if status1 == dlstatus.STATUSEX_ENDDOWNLOAD then
 						if goupdatestatus == nil then
-						  sampAddChatMessage(('{42AAFF}[Babetape Helper] {FFFFFF}Обновление прошло неудачно. Запускаю устаревшую версию..'), color, 0x42AAFF)
+						  sampAddChatMessage(('{42AAFF}[Babetape Helper] {FFFFFF}Обновление прошло неудачно. Запускаю устаревшую версию..'), color)
 						  update = false
 						end
 					  end
@@ -511,11 +511,11 @@ function autoupdate(json_url, prefix, url)
 				)
 			  else
 				update = false
-				print('v'..thisScript().version..': Обновление не требуется.', 0x42AAFF)
+				print('v'..thisScript().version..': Обновление не требуется.', -1)
 			  end
 			end
 		  else
-			print('v'..thisScript().version..': Не могу проверить обновление. Смиритесь или проверьте самостоятельно', 0x42AAFF)
+			print('v'..thisScript().version..': Не могу проверить обновление. Смиритесь или проверьте самостоятельно', -1)
 			update = false
 		  end
 		end
