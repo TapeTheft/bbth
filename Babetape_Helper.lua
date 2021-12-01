@@ -1,4 +1,4 @@
-script_version(1.1)
+script_version(1.2)
 script_author = "Tape"
 
 local imgui = require 'imgui'
@@ -10,7 +10,7 @@ local fa = require 'fAwesome5'
 encoding.default = 'CP1251'
 u8 = encoding.UTF8
 
-local LAST_VERSION = '1.1'
+local LAST_VERSION = '1.2'
 
 local sw,sh = getScreenResolution()
 
@@ -174,7 +174,7 @@ function imgui.OnDrawFrame()
 			imgui.SetNextWindowPos(imgui.ImVec2(sw / 2, sh / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
 		end
 
-	  imgui.Begin('Babetape Helper', main_window_state, imgui.WindowFlags.NoCollapse + imgui.WindowFlags.NoResize)
+	  imgui.Begin('Babetape Helper ' ..thisScript().version, main_window_state, imgui.WindowFlags.NoCollapse + imgui.WindowFlags.NoResize)
 
 	  	imgui.Text(u8"Очистка буффера: /acl")
 			imgui.SameLine()
@@ -204,7 +204,7 @@ function imgui.OnDrawFrame()
 	  	        imgui.EndChild()
 
 				imgui.BeginChild("##car_bar", imgui.ImVec2(380, 298), true)
-			imgui.Text(fa.ICON_FA_CAR .. u8" Транспорт")
+			imgui.Text(u8"Транспорт")
 				imgui.Checkbox(u8"Закрытие транспорта", lock)
 				mainIni.config.lock = lock.v
 				save()
@@ -248,7 +248,7 @@ function imgui.OnDrawFrame()
 	  	        imgui.EndChild()
 				  
 	  	        imgui.BeginChild("##player_bar", imgui.ImVec2(380, 108), true)
-			imgui.Text(fa.ICON_FA_MALE .. u8" Персонаж")
+			imgui.Text(u8"Персонаж")
 				imgui.Checkbox(u8"Телефон", tlf)
 				mainIni.config.tlf = tlf.v
 				save()
