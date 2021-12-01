@@ -1,4 +1,5 @@
 script_version(1.1)
+script_name(Babetape Helper)
 script_author = "Tape"
 
 local imgui = require 'imgui'
@@ -9,6 +10,8 @@ local hook = require 'lib.samp.events'
 local fa = require 'fAwesome5'
 encoding.default = 'CP1251'
 u8 = encoding.UTF8
+
+local LAST_VERSION = '1.1'
 
 local sw,sh = getScreenResolution()
 
@@ -45,8 +48,6 @@ drugs = false,
 olock = false,
 weather = "1",
 lockweather = false,
-remover_me = false,
-glow = false,
 }
 }, directIni)
 inicfg.save(mainIni, directIni)
@@ -72,14 +73,98 @@ local acd = imgui.ImBool(mainIni.config.acd)
 local pizza = imgui.ImBool(mainIni.config.pizza)
 local drugs = imgui.ImBool(mainIni.config.drugs)
 local blockweather = imgui.ImBool(mainIni.config.lockweather)
-local remover_me = imgui.ImBool(mainIni.config.remover_me)
-local glow = imgui.ImBool(mainIni.config.glow)
 
 local status = inicfg.load(mainIni, 'Babetape Helper.ini')
 if not doesFileExist('moonloader/config/Babetape Helper.ini') then inicfg.save(mainIni, 'Babetape Helper.ini') end
 
 local main_window_state = imgui.ImBool(false)
 local created = false
+
+function main()
+    if not isSampLoaded() or not isSampfuncsLoaded() then return end
+	while not isSampAvailable() do wait(100) end
+		imgui.Process = false
+	sampAddChatMessage("{42AAFF}[Babetape Helper] {ffffff}��������!", 0x42AAFF)	
+	sampAddChatMessage("{42AAFF}[Babetape Helper] {ffffff}���������: {42AAFF}/bbth. {FFFFFF}�����: {42AAFF}Tape", 0x42AAFF)	
+	sampRegisterChatCommand("acl",clean)
+	sampRegisterChatCommand("bbth", function()		
+      main_window_state.v = not main_window_state.v
+	end)
+	autoupdate("https://github.com/TapeTheft/bbth/raw/main/update.json", '['..string.upper(thisScript().name)..']: ', "https://github.com/TapeTheft/bbth/raw/main/update.json")
+	while true do
+		wait(0)
+		imgui.Process = main_window_state.v
+		if tlf.v and wasKeyPressed(0x50) and not sampIsCursorActive() then
+			sampSendChat("/phone")
+		end
+		if arm.v then
+			if testCheat("arm") and not sampIsChatInputActive() then
+				sampSendChat("/armour")
+			end
+		end
+		if msk.v then
+			if testCheat("mask") and not sampIsCursorActive() then
+				sampSendChat("/mask")
+			end
+		end
+		if olock.v and not sampIsChatInputActive() then
+			if testCheat("ol") then
+				sampSendChat("/olock")
+			end
+		end
+		if jlock.v and not sampIsChatInputActive() then
+			if testCheat("jl") then
+				sampSendChat("/jlock")
+			end
+		end
+		if lock.v and not sampIsChatInputActive() then
+			if testCheat("l") then
+				sampSendChat("/lock")
+			end
+		end
+		if drugs.v and not sampIsCursorActive() then
+			if wasKeyPressed(0x61) and isKeyDown(0x12) then
+                sampSendChat("/usedrugs 1")
+            end
+            if wasKeyPressed(0x62) and isKeyDown(0x12) then
+                sampSendChat("/usedrugs 2")
+            end
+            if wasKeyPressed(0x63) and isKeyDown(0x12) then
+                sampSendChat("/usedrugs 3")
+			end
+		end
+		if fcar.v and not sampIsCursorActive() then
+			if testCheat("can") then
+				sampSendChat("/fillcar")
+			end
+		end
+		if recar.v and not sampIsCursorActive() then
+			if testCheat("recar") then
+				sampSendChat("/repcar")
+			end
+		end
+		if key.v then
+			if testCheat("K") and isCharInAnyCar(PLAYER_PED) then
+               sampSendChat("/key")
+			end
+		end
+		if style.v then
+		 	if testCheat("X") and isCharInAnyCar(PLAYER_PED) then
+				sampSendChat("/style")
+			 end
+		end
+		if mainIni.config.lockweather == true and mainIni.config.weather ~= memory.read(0xC81320, 1, false) then memory.write(0xC81320, mainIni.config.weather, 1, false) end
+	end
+end
+
+function onScriptTerminate(script, quitGame)
+	if script == thisScript() then
+		if created then
+			sampTextdrawDelete(2029)
+		end
+		save()
+	end
+end
 
 function imgui.OnDrawFrame()
   		imgui.ShowCursor = main_window_state.v
@@ -117,12 +202,6 @@ function imgui.OnDrawFrame()
 					mainIni.config.lockweather = blockweather.v
 					save()
                 end		
-				imgui.Checkbox(u8'������� ��� ����', remover_me)
-				mainIni.config.remover_me = remover_me.v
-				save()
-				imgui.Checkbox(u8'������� �������� �����', glow)
-				mainIni.config.glow = glow.v
-				save()
 	  	        imgui.EndChild()
 
 				imgui.BeginChild("##car_bar", imgui.ImVec2(380, 298), true)
@@ -217,111 +296,6 @@ function imgui.OnDrawFrame()
 				end
 			imgui.End()
 	    end
-end
-
-function hook.onSetPlayerAttachedObject(playerId, index, create, object)
-	if glow.v then
-    	if object.modelId == 1276 then 
-			return false
-		end
-	end
-end
-
-function main()
-    if not isSampLoaded() or not isSampfuncsLoaded() then return end
-	while not isSampAvailable() do wait(100) end
-		imgui.Process = false
-	sampAddChatMessage("{42AAFF}[Babetape Helper] {ffffff}��������!", 0x42AAFF)	
-	sampAddChatMessage("{42AAFF}[Babetape Helper] {ffffff}���������: {42AAFF}/bbth. {FFFFFF}�����: {42AAFF}Tape", 0x42AAFF)	
-	sampRegisterChatCommand("acl",clean)
-	sampRegisterChatCommand("bbth", function()		
-      main_window_state.v = not main_window_state.v
-	end)
-	getNewVersion()
-    sampRegisterChatCommand('update', function()
-        if thisScript().version ~= LAST_VERSION then
-            autoupdate(json_url, 'SCRIPT', 'google.com')
-        else
-            sampAddChatMessage('� ���� � ��� ��������� ������', -1)
-        end
-    end)
-    if thisScript().version ~= LAST_VERSION then
-        sampAddChatMessage('�������� ���������� (���� ������: '..thisScript().version..', ���������: '..LAST_VERSION, -1)
-        sampAddChatMessage('��������� /update ��� �� �������� ������', -1)
-    end
-	while true do
-		wait(0)
-		imgui.Process = main_window_state.v
-		if tlf.v and wasKeyPressed(0x50) and not sampIsCursorActive() then
-			sampSendChat("/phone")
-		end
-		if arm.v then
-			if testCheat("arm") and not sampIsChatInputActive() then
-				sampSendChat("/armour")
-			end
-		end
-		if msk.v then
-			if testCheat("mask") and not sampIsCursorActive() then
-				sampSendChat("/mask")
-			end
-		end
-		if olock.v and not sampIsChatInputActive() then
-			if testCheat("ol") then
-				sampSendChat("/olock")
-			end
-		end
-		if jlock.v and not sampIsChatInputActive() then
-			if testCheat("jl") then
-				sampSendChat("/jlock")
-			end
-		end
-		if lock.v and not sampIsChatInputActive() then
-			if testCheat("l") then
-				sampSendChat("/lock")
-			end
-		end
-		if drugs.v and not sampIsCursorActive() then
-			if wasKeyPressed(0x61) and isKeyDown(0x12) then
-                sampSendChat("/usedrugs 1")
-            end
-            if wasKeyPressed(0x62) and isKeyDown(0x12) then
-                sampSendChat("/usedrugs 2")
-            end
-            if wasKeyPressed(0x63) and isKeyDown(0x12) then
-                sampSendChat("/usedrugs 3")
-			end
-		end
-		if fcar.v and not sampIsCursorActive() then
-			if testCheat("can") then
-				sampSendChat("/fillcar")
-			end
-		end
-		if recar.v and not sampIsCursorActive() then
-			if testCheat("recar") then
-				sampSendChat("/repcar")
-			end
-		end
-		if key.v then
-			if testCheat("K") and isCharInAnyCar(PLAYER_PED) then
-               sampSendChat("/key")
-			end
-		end
-		if style.v then
-		 	if testCheat("X") and isCharInAnyCar(PLAYER_PED) then
-				sampSendChat("/style")
-			 end
-		end
-		if mainIni.config.lockweather == true and mainIni.config.weather ~= memory.read(0xC81320, 1, false) then memory.write(0xC81320, mainIni.config.weather, 1, false) end
-	end
-end
-
-function onScriptTerminate(script, quitGame)
-	if script == thisScript() then
-		if created then
-			sampTextdrawDelete(2029)
-		end
-		save()
-	end
 end
 
 function hook.onServerMessage(color, message)
@@ -496,74 +470,57 @@ function imgui.Link(link,name,myfunc)
 end
 
 function autoupdate(json_url, prefix, url)
-    local dlstatus = require('moonloader').download_status
-    local json = getWorkingDirectory() .. '\\'..thisScript().name..'-version.json'
-    if doesFileExist(json) then os.remove(json) end
-    downloadUrlToFile(json_url, json,
-        function(id, status, p1, p2)
-            if status == dlstatus.STATUSEX_ENDDOWNLOAD then
-                if doesFileExist(json) then
-                    local f = io.open(json, 'r')
-                    if f then
-                        local info = decodeJson(f:read('*a'))
-                        updatelink = info.updateurl
-                        updateversion = info.latest
-                        f:close()
-                        os.remove(json)
-                        if updateversion ~= thisScript().version then
-                            lua_thread.create(function(prefix)
-                                local dlstatus = require('moonloader').download_status
-                                local color = -1
-                                sampAddChatMessage(('{42AAFF}[Babetape Helper] ���������� ����������. ������� ���������� c {42AAFF}'..thisScript().version..' {FFFFFF}�� {42AAFF}'..updateversion), color)
-                                wait(250)
-                                downloadUrlToFile(updatelink, thisScript().path,
-                                function(id3, status1, p13, p23)
-                                if status1 == dlstatus.STATUS_DOWNLOADINGDATA then
-                                    print(string.format('Загружено %d из %d.', p13, p23))
-                                elseif status1 == dlstatus.STATUS_ENDDOWNLOADDATA then
-                                    print('�������� ���������� ���������.')
-                                    sampAddChatMessage((prefix..'���������� ���������!'), color)
-                                    goupdatestatus = true
-                                    lua_thread.create(function() wait(500) thisScript():reload() end)
-                                end
-                                if status1 == dlstatus.STATUSEX_ENDDOWNLOAD then
-                                    if goupdatestatus == nil then
-                                        sampAddChatMessage((prefix..'���������� ������ ��������. �������� ���������� ������..'), color)
-                                        update = false
-                                    end
-                                end
-                            end)
-                        end, prefix)
-                    else
-                        update = false
-                        print('v'..thisScript().version..': ���������� �� ���������.')
-                    end
-                end
-            else
-                print('v'..thisScript().version..': �� ���� ��������� ����������. ��������� ��� ��������� �������������� �� '..url)
-                update = false
-            end
-        end
-    end)
-    while update ~= false do wait(100) end
-end
-
-function getNewVersion()
-    local dlstatus = require('moonloader').download_status
-    local json = getWorkingDirectory() .. '\\'..thisScript().name..'-version.json'
-    if doesFileExist(json) then os.remove(json) end
-    downloadUrlToFile(json_url, json, function(id, status, p1, p2)
-        if status == dlstatus.STATUSEX_ENDDOWNLOAD then
-            if doesFileExist(json) then
-                local f = io.open(json, 'r')
-                if f then
-                    local info = decodeJson(f:read('*a'))
-                    updatelink = info.updateurl
-                    LAST_VERSION = info.latest
-                    f:close()
-                    os.remove(json)
-                end
-            end
-        end
-    end)
-end
+	local dlstatus = require('moonloader').download_status
+	local json = getWorkingDirectory() .. '\\'..thisScript().name..'-version.json'
+	if doesFileExist(json) then os.remove(json) end
+	downloadUrlToFile(json_url, json,
+	  function(id, status, p1, p2)
+		if status == dlstatus.STATUSEX_ENDDOWNLOAD then
+		  if doesFileExist(json) then
+			local f = io.open(json, 'r')
+			if f then
+			  local info = decodeJson(f:read('*a'))
+			  updatelink = info.updateurl
+			  updateversion = info.latest
+			  f:close()
+			  os.remove(json)
+			  if updateversion ~= thisScript().version then
+				lua_thread.create(function(prefix)
+				  local dlstatus = require('moonloader').download_status
+				  local color = -1
+				  sampAddChatMessage((prefix..'���������� ����������. ������� ���������� c '..thisScript().version..' �� '..updateversion), color)
+				  wait(250)
+				  downloadUrlToFile(updatelink, thisScript().path,
+					function(id3, status1, p13, p23)
+					  if status1 == dlstatus.STATUS_DOWNLOADINGDATA then
+						print(string.format('��������� %d �� %d.', p13, p23))
+					  elseif status1 == dlstatus.STATUS_ENDDOWNLOADDATA then
+						print('�������� ���������� ���������.')
+						sampAddChatMessage((prefix..'���������� ���������!'), color)
+						goupdatestatus = true
+						lua_thread.create(function() wait(500) thisScript():reload() end)
+					  end
+					  if status1 == dlstatus.STATUSEX_ENDDOWNLOAD then
+						if goupdatestatus == nil then
+						  sampAddChatMessage((prefix..'���������� ������ ��������. �������� ���������� ������..'), color)
+						  update = false
+						end
+					  end
+					end
+				  )
+				  end, prefix
+				)
+			  else
+				update = false
+				print('v'..thisScript().version..': ���������� �� ���������.')
+			  end
+			end
+		  else
+			print('v'..thisScript().version..': �� ���� ��������� ����������. ��������� ��� ��������� �������������� �� '..url)
+			update = false
+		  end
+		end
+	  end
+	)
+	while update ~= false do wait(100) end
+  end
