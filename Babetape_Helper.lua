@@ -278,7 +278,7 @@ function imgui.OnDrawFrame()
 
 		    	imgui.SetCursorPos(imgui.ImVec2(370, 30))
 		    	if imgui.Button(u8('')..fa.ICON_FA_RETWEET, imgui.ImVec2(25,25)) then
-					sampAddChatMessage("{6A5ACD}[A.Helper] {FFFFFF}Скрипт успешно перезапущен.", 0x6A5ACD)
+					sampAddChatMessage("{42AAFF}[Babetape Helper] {FFFFFF}Скрипт успешно перезапущен.", -1)
 		    		reloadsc()
 				end
 				
