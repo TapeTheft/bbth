@@ -1,4 +1,4 @@
-script_version(1.0)
+script_version(1.1)
 script_author = "Tape"
 
 local imgui = require 'imgui'
@@ -10,7 +10,7 @@ local fa = require 'fAwesome5'
 encoding.default = 'CP1251'
 u8 = encoding.UTF8
 
-local LAST_VERSION = '1.0'
+local LAST_VERSION = '1.1'
 
 local sw,sh = getScreenResolution()
 
@@ -83,8 +83,8 @@ function main()
     if not isSampLoaded() or not isSampfuncsLoaded() then return end
 	while not isSampAvailable() do wait(100) end
 		imgui.Process = false
-	sampAddChatMessage("{42AAFF}[Babetape Helper] {ffffff}Загружен!", -1)	
-	sampAddChatMessage("{42AAFF}[Babetape Helper] {ffffff}Активация: {42AAFF}/bbth. {FFFFFF}Автор: {42AAFF}Tape", -1)	
+	sampAddChatMessage("{42AAFF}[Babetape Helper] {ffffff}пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!", -1)	
+	sampAddChatMessage("{42AAFF}[Babetape Helper] {ffffff}пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: {42AAFF}/bbth. {FFFFFF}пїЅпїЅпїЅпїЅпїЅ: {42AAFF}Tape", -1)	
 	sampRegisterChatCommand("acl",clean)
 	sampRegisterChatCommand("bbth", function()		
       main_window_state.v = not main_window_state.v
@@ -176,109 +176,109 @@ function imgui.OnDrawFrame()
 
 	  imgui.Begin('Babetape Helper', main_window_state, imgui.WindowFlags.NoCollapse + imgui.WindowFlags.NoResize)
 
-	  	imgui.Text(u8"Очистка буффера: /acl")
+	  	imgui.Text(u8"пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: /acl")
 			imgui.SameLine()
-			imgui.TextQuestion(u8"Очищает память стрима, и вы начинаете играть как будто вы только запустили гта.")
+			imgui.TextQuestion(u8"пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ.")
 			imgui.SetNextWindowPos(imgui.ImVec2((sw/2),sh/2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5,0.5))
 	        	imgui.BeginChild("##other_bar", imgui.ImVec2(380, 170), true)
-			 imgui.Text(u8"Разное")			 
-				imgui.Checkbox(u8"Переводить секунды в минуты в деморгане",dmg)
+			 imgui.Text(u8"пїЅпїЅпїЅпїЅпїЅпїЅ")			 
+				imgui.Checkbox(u8"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",dmg)
 				mainIni.config.dmg = dmg.v
 				save()
 				imgui.SameLine()
-				imgui.TextQuestion(u8"Вместо секунд теперь в деморгане будут показыватся минуты.")
-				imgui.Checkbox(u8"Cкип диалога о ЗЗ", zz)
+				imgui.TextQuestion(u8"пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.")
+				imgui.Checkbox(u8"CпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅ", zz)
 				mainIni.config.zz = zz.v
 				save()
 				imgui.SameLine()
-				imgui.TextQuestion(u8"Как только скрипт увидит диалог с текстом 'Запрещено дратся' - он его пропустит.")
-				imgui.Checkbox(u8"Cкип диалога о пицце", pizza)
+				imgui.TextQuestion(u8"пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ' - пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.")
+				imgui.Checkbox(u8"CпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ", pizza)
 				mainIni.config.pizza = pizza.v
 				save()
 				imgui.SameLine()
-				imgui.TextQuestion(u8"Как только скрипт увидит диалог с текстом 'Вы успешно положили пиццу' - он его пропустит.")	
-				if imgui.Checkbox(u8"Блокировка изменения погоды сервером", blockweather) then
+				imgui.TextQuestion(u8"пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 'пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ' - пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.")	
+				if imgui.Checkbox(u8"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", blockweather) then
 					mainIni.config.lockweather = blockweather.v
 					save()
                 end		
 	  	        imgui.EndChild()
 
 				imgui.BeginChild("##car_bar", imgui.ImVec2(380, 298), true)
-			imgui.Text(u8"Транспорт")
-				imgui.Checkbox(u8"Закрытие транспорта", lock)
+			imgui.Text(u8"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ")
+				imgui.Checkbox(u8"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", lock)
 				mainIni.config.lock = lock.v
 				save()
 				imgui.SameLine()
-				imgui.TextQuestion(u8"При нажатии на клавишу L вы закроете/откроете свой транспорт.")
-				imgui.Checkbox(u8"Закрытие аренды", jlock)
+				imgui.TextQuestion(u8"пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ L пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ/пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.")
+				imgui.Checkbox(u8"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ", jlock)
 				mainIni.config.jlock = jlock.v
 				save()
 				imgui.SameLine()
-				imgui.TextQuestion(u8"При нажатии сочитаний клавиш JL вы откроете/закроете арендованный транспорт.")
-				imgui.Checkbox(u8"Закрытие орг. т/с", olock)
+				imgui.TextQuestion(u8"пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ JL пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ/пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.")
+				imgui.Checkbox(u8"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ. пїЅ/пїЅ", olock)
 				mainIni.config.olock = olock.v
 				save()
 				imgui.SameLine()
-				imgui.TextQuestion(u8"При нажатии сочитаний клавиш OL вы откроете/закроете организационный транспорт.")
-				imgui.Checkbox(u8"Ключи от авто", key)
+				imgui.TextQuestion(u8"пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ OL пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ/пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.")
+				imgui.Checkbox(u8"пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ", key)
 				mainIni.config.key = key.v
 				save()
 				imgui.SameLine()
-				imgui.TextQuestion(u8"При нажатии на клавишу K вы вставите/вытащите ключи.")
-				imgui.Checkbox(u8"Стиль вождения", style)
+				imgui.TextQuestion(u8"пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ K пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ/пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.")
+				imgui.Checkbox(u8"пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", style)
 				mainIni.config.style = style.v
 				save()
 				imgui.SameLine()
-				imgui.TextQuestion(u8"При нажатии на клавишу X сменится стиль езды авто.")
-				imgui.Checkbox(u8"Заправить авто", fcar)
+				imgui.TextQuestion(u8"пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ X пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ.")
+				imgui.Checkbox(u8"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ", fcar)
 				mainIni.config.fcar = fcar.v
 				save()
 				imgui.SameLine()
-				imgui.TextQuestion(u8"При нажатии сочитаний клавиш CAN вы заправите транспорт используя канистру.")
-				imgui.Checkbox(u8"Починить авто", recar)
+				imgui.TextQuestion(u8"пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ CAN пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.")
+				imgui.Checkbox(u8"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ", recar)
 				mainIni.config.recar = recar.v
 				save()
 				imgui.SameLine()
-				imgui.TextQuestion(u8"При нажатии сочитани клавиш RECAR вы почините транспорт используя ремкомплект.")
-				imgui.Checkbox(u8"Автозакрытие дверей", acd)
+				imgui.TextQuestion(u8"пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ RECAR пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.")
+				imgui.Checkbox(u8"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ", acd)
 				mainIni.config.acd = acd.v
 				save()
 			    imgui.SameLine()
-			    imgui.TextQuestion(u8"Как только скрипт увидит что вы словили авто по госсу он автоматически закроет двери авто.")
+			    imgui.TextQuestion(u8"пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ.")
 	  	        imgui.EndChild()
 				  
 	  	        imgui.BeginChild("##player_bar", imgui.ImVec2(380, 108), true)
-			imgui.Text(u8"Персонаж")
-				imgui.Checkbox(u8"Телефон", tlf)
+			imgui.Text(u8"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ")
+				imgui.Checkbox(u8"пїЅпїЅпїЅпїЅпїЅпїЅпїЅ", tlf)
 				mainIni.config.tlf = tlf.v
 				save()
 				imgui.SameLine()
-				imgui.TextQuestion(u8"При нажатии на клавишу P у вас откроется телефон.")
+				imgui.TextQuestion(u8"пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ P пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.")
 				imgui.SameLine()
-				imgui.Checkbox(u8"Бронежилет", arm)
+				imgui.Checkbox(u8"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", arm)
 				mainIni.config.arm = arm.v
 				save()
 				imgui.SameLine()
-				imgui.TextQuestion(u8"При нажатии сочетаний клавиш ARM вы оденете бронежилет.")
-				imgui.Checkbox(u8"Маска", msk)
+				imgui.TextQuestion(u8"пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ARM пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.")
+				imgui.Checkbox(u8"пїЅпїЅпїЅпїЅпїЅ", msk)
 				mainIni.config.msk = msk.v
 				save()
 				imgui.SameLine()
-				imgui.TextQuestion(u8"При нажатии сочетаний клавиш MASK вы оденете маску.")
+				imgui.TextQuestion(u8"пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ MASK пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.")
 				imgui.SameLine()
-				imgui.Checkbox(u8"Наркотики", drugs)
+				imgui.Checkbox(u8"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", drugs)
 				mainIni.config.drugs = drugs.v		
 				save()
 				imgui.SameLine()
-				imgui.TextQuestion(u8"При нажатии сочетаний клавиш ALT + 1/2/3 (нумпад) вы используете наркотики.")
+				imgui.TextQuestion(u8"пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ALT + 1/2/3 (пїЅпїЅпїЅпїЅпїЅпїЅ) пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.")
 				imgui.SameLine()
 				imgui.EndChild()
 
-				imgui.Text(u8"Самый лучший промокод: #babetape") 
+				imgui.Text(u8"пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: #babetape") 
 
 		    	imgui.SetCursorPos(imgui.ImVec2(370, 30))
 		    	if imgui.Button(u8('')..fa.ICON_FA_RETWEET, imgui.ImVec2(25,25)) then
-					sampAddChatMessage("{42AAFF}[Babetape Helper] {FFFFFF}Скрипт успешно перезапущен.", -1)
+					sampAddChatMessage("{42AAFF}[Babetape Helper] {FFFFFF}пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.", -1)
 		    		reloadsc()
 				end
 				
@@ -299,7 +299,7 @@ end
 
 function hook.onServerMessage(color, message)
 	if acd.v then
-		if message:find("Поздравляем! Теперь этот транспорт принадлежит вам!") and not message:find('говорит') and not message:find('- |') then
+		if message:find("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ! пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ!") and not message:find('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ') and not message:find('- |') then
 			sampSendChat('/lock')
 		end
 	end
@@ -323,7 +323,7 @@ function clean()
     local pX, pY, pZ = getCharCoordinates(PLAYER_PED)
     requestCollision(pX, pY)
     loadScene(pX, pY, pZ)
-    sampAddChatMessage("{42AAFF}[Babetape Helper] {FFFFFF}Очистка произошла успешно!", -1)
+    sampAddChatMessage("{42AAFF}[Babetape Helper] {FFFFFF}пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ!", -1)
 end
 
 function hook.onDisplayGameText(style, time, text)
@@ -337,13 +337,13 @@ end
 
 function hook.onShowDialog(dialogId, dialogStyle, dialogTitle, okButtonText, cancelButtonText, dialogText)
 	if zz.v then
-	    if dialogText:find("В этом месте запрещено") then
+	    if dialogText:find("пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ") then
 			sampSendDialogResponse(dialogId,1,0,-1)
 			return false
 		end
 	end
 	if pizza.v then
-	    if dialogText:find("Вы успешно положили") then
+	    if dialogText:find("пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ") then
 			sampSendDialogResponse(dialogId,1,0,-1)
 			return false
 		end
@@ -487,21 +487,21 @@ function autoupdate(json_url, prefix, url)
 				lua_thread.create(function(prefix)
 				  local dlstatus = require('moonloader').download_status
 				  local color = -1
-				  sampAddChatMessage(('{42AAFF}[Babetape Helper] {FFFFFF}Обнаружено обновление. Пытаюсь обновиться c {42AAFF}'..thisScript().version..' {FFFFFF}на {42AAFF}'..updateversion), color)	
+				  sampAddChatMessage(('{42AAFF}[Babetape Helper] {FFFFFF}пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ c {42AAFF}'..thisScript().version..' {FFFFFF}пїЅпїЅ {42AAFF}'..updateversion), color)	
 				  wait(250)
 				  downloadUrlToFile(updatelink, thisScript().path,
 					function(id3, status1, p13, p23)
 					  if status1 == dlstatus.STATUS_DOWNLOADINGDATA then
-						print(string.format('Загружено %d из %d.', p13, p23))
+						print(string.format('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ %d пїЅпїЅ %d.', p13, p23))
 					  elseif status1 == dlstatus.STATUS_ENDDOWNLOADDATA then
-						print('Загрузка обновления завершена.')
-						sampAddChatMessage(('{42AAFF}[Babetape Helper] {FFFFFF}Обновление завершено!'), color)
+						print('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.')
+						sampAddChatMessage(('{42AAFF}[Babetape Helper] {FFFFFF}пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!'), color)
 						goupdatestatus = true
 						lua_thread.create(function() wait(500) thisScript():reload() end)
 					  end
 					  if status1 == dlstatus.STATUSEX_ENDDOWNLOAD then
 						if goupdatestatus == nil then
-						  sampAddChatMessage(('{42AAFF}[Babetape Helper] {FFFFFF}Обновление прошло неудачно. Запускаю устаревшую версию..'), color)
+						  sampAddChatMessage(('{42AAFF}[Babetape Helper] {FFFFFF}пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ..'), color)
 						  update = false
 						end
 					  end
@@ -511,11 +511,11 @@ function autoupdate(json_url, prefix, url)
 				)
 			  else
 				update = false
-				print('v'..thisScript().version..': Обновление не требуется.', -1)
+				print('v'..thisScript().version..': пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.', -1)
 			  end
 			end
 		  else
-			print('v'..thisScript().version..': Не могу проверить обновление. Смиритесь или проверьте самостоятельно', -1)
+			print('v'..thisScript().version..': пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', -1)
 			update = false
 		  end
 		end
